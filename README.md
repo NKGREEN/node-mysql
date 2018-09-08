@@ -4,6 +4,6 @@
 This is a basic Amazon marketplace-like interface for geeks, created with NodeJs. 
 
 # Customer view:
-Allows customersto see items for sale and select one for purchase by typing the item's ID number.
+Allows customers to see items for sale and make purchases by typing in the item's unique ID number.
 
 DEMO VIDEO:
