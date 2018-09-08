@@ -8,12 +8,12 @@ var itemArray = [];
 var cost;
 
 // Constructor variable for item requested in store
-function item(id, name, price, quantity, autograph){
+function item(id, name, price, quantity, department){
 	this.id = id;
 	this.name = name;
 	this.price = price;
 	this.quantity = quantity;
-	this.autograph = autograph;
+	this.dept = dept;
 }
 
 // Creates variable connection to mysql
@@ -21,7 +21,7 @@ var connection = mysql.createConnection({
 	host: 'localhost',
 	user: 'root',
 	password: 'root',
-	database: 'bieBay'
+	database: 'geekGrove'
 });
 
 connectin();
@@ -39,11 +39,11 @@ connection.connect(function (error, response) {
 };
 
 
-// Initial menu to Geek Grove store. Shows items available for sale
+// Initial menu for Geek Grove store. Shows items available for sale
 function introItems () {
 
 		//console.log("Connected to MySQL server, as ID = " + connection.threadId);
-		connection.query("SELECT * FROM `bieBay`", function(err, response) {
+		connection.query("SELECT * FROM `geekGrove`", function(err, response) {
 			if (err) {
 				console.log(err)
 			}
@@ -121,7 +121,7 @@ function orderQuantity () {
 					itemArray = [];
 					//console.log(response[0].product_name);
 					
-					var newItem = new item (response[0].item_id, response[0].product_name, response[0].price, response[0].stock_quantity, response[0].autograph);
+					let newItem = new item (response[0].item_id, response[0].product_name, response[0].price, response[0].stock_quantity, response[0].dept);
 					//console.log(newItem);
 					itemArray.push(newItem);
 					//console.log(requestedQuantity);
@@ -170,9 +170,9 @@ function processOrder () {
 		}
 		else {
 			console.log('');
-			console.log('Success! Your card has been charged: $' + cost);
+			console.log('Success! Your order is complete. Total charged: $' + cost);
 			console.log('');
-			console.log('Your product(s) will be mailed to the address on file.');
+			console.log('Your order will be shipped to the address on file.');
 			console.log('');
 			nextOrder();
 		}
